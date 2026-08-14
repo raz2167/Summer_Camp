@@ -32,7 +32,7 @@ describe("computeSpread", () => {
 
 describe("assignToHistogram", () => {
   it("fills every slot defined by counts, weakest to group 1, strongest to group 7", () => {
-    const counts = [1, 2, 3, 5, 3, 2, 1]; // 17-cadet histogram א
+    const counts = [1, 2, 3, 5, 3, 2, 1]; // 17-student histogram א
     const weakToStrong = Array.from({ length: 17 }, (_, i) => i + 1);
     const groups = assignToHistogram(counts, weakToStrong);
     expect(groups[1]).toEqual([1]);
@@ -44,7 +44,7 @@ describe("assignToHistogram", () => {
 
   it("leaves unscored slots as null instead of throwing", () => {
     const counts = [1, 2, 3, 5, 3, 2, 1];
-    const groups = assignToHistogram(counts, [1, 2, 3]); // only 3 cadets scored so far
+    const groups = assignToHistogram(counts, [1, 2, 3]); // only 3 students scored so far
     const flat = Object.values(groups).flat();
     expect(flat.filter((v) => v !== null)).toHaveLength(3);
     expect(flat).toHaveLength(17);
@@ -61,7 +61,7 @@ describe("assignToHistogram", () => {
 });
 
 describe("computeLiveGroups", () => {
-  it("puts the single scored cadet in the center group", () => {
+  it("puts the single scored student in the center group", () => {
     expect(computeLiveGroups(1, { 5: 1 })).toEqual({ 5: 4 });
   });
 
@@ -74,7 +74,7 @@ describe("computeLiveGroups", () => {
 });
 
 describe("buildLiveHistogramGrid", () => {
-  it("buckets cadets by their assigned group", () => {
+  it("buckets students by their assigned group", () => {
     const grid = buildLiveHistogramGrid([1, 2, 3], { 1: 4, 2: 4, 3: 7 });
     expect(grid[4]).toEqual([1, 2]);
     expect(grid[7]).toEqual([3]);

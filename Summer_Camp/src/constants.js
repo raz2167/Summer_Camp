@@ -8,7 +8,7 @@ export const TRAITS = [
   "ביטחון עצמי",
 ];
 
-export const OBS_TRAITS = ["כושר גופני", "התאמה ליחידה לוחמת"];
+export const OBS_TRAITS = ["כושר גופני", "התאמה לפעילות שטח"];
 
 export const HIST_COLORS = {
   1: "#7A1F1F",
@@ -20,7 +20,7 @@ export const HIST_COLORS = {
   7: "#1F4A2E",
 };
 
-// Verified against gibush_source.xlsx — each row is [group1..group7] counts,
+// Verified against the source spreadsheet — each row is [group1..group7] counts,
 // summing to the class size. Do not edit without re-verifying against the source.
 export const HIST_DATA = {
   17: [

@@ -14,7 +14,7 @@ export default function HistogramGrid({ groups, showNumbers = true }) {
           return (
             <div className="flex flex-col items-center w-14" key={g}>
               <div className="flex flex-col-reverse gap-[3px] w-full min-h-[34px]">
-                {members.map((cadet, idx) => (
+                {members.map((student, idx) => (
                   <div
                     key={idx}
                     className="rounded-lg flex items-center justify-center font-bold text-[13px] min-h-[30px] shadow-[inset_0_-2px_0_rgba(0,0,0,0.08)] animate-hist-grow"
@@ -23,7 +23,7 @@ export default function HistogramGrid({ groups, showNumbers = true }) {
                       color: g <= 2 || g === 7 ? "#F5F1E8" : "#1C2321",
                     }}
                   >
-                    {showNumbers && cadet != null ? cadet : ""}
+                    {showNumbers && student != null ? student : ""}
                   </div>
                 ))}
                 {members.length === 0 && <div className="min-h-[30px]" />}

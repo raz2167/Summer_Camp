@@ -1,4 +1,4 @@
-# גיבוש — מערכת הערכת מלש״בים
+# מחנה קיץ - צופים — מערכת הערכת תלמידים
 
 React + Vite, client-side only (no backend, no data persistence).
 

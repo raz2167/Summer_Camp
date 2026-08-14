@@ -19,9 +19,9 @@ export default function PageSetup({ initialSetup, onContinue }) {
   return (
     <div className="max-w-[1100px] mx-auto px-6 pt-12 pb-20">
       <div className="text-xs font-bold tracking-wider text-cta uppercase mb-2">שלב א׳</div>
-      <h1 className="text-[34px] font-extrabold mb-3 tracking-tight">כמה מלש״בים בכיתה?</h1>
+      <h1 className="text-[34px] font-extrabold mb-3 tracking-tight">כמה תלמידים בכיתה?</h1>
       <p className="text-[15px] text-muted max-w-[520px] leading-relaxed mb-10">
-        בחר את גודל הכיתה המקורי, ולאחר מכן סמן אילו מספרי ברזל אינם פעילים (פרשו).
+        בחר את גודל הכיתה המקורי, ולאחר מכן סמן אילו מספרי תלמיד אינם פעילים (עזבו).
       </p>
 
       <div className="flex gap-3 mb-10 flex-wrap">
@@ -45,7 +45,7 @@ export default function PageSetup({ initialSetup, onContinue }) {
       </div>
 
       <div className="bg-cream border border-sand rounded-md p-6 mb-7">
-        <div className="text-[13px] font-bold text-muted mb-4">מספרי ברזל שאינם פעילים</div>
+        <div className="text-[13px] font-bold text-muted mb-4">מספרי תלמיד שאינם פעילים</div>
         <div className="flex flex-wrap gap-2">
           {Array.from({ length: size }, (_, i) => i + 1).map((n) => (
             <button

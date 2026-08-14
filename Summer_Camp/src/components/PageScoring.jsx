@@ -17,23 +17,23 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
   const selectedVariant = session.selectedVariant;
   const activeCount = active.length;
 
-  const setScore = (cadet, traitIdx, val) => {
+  const setScore = (student, traitIdx, val) => {
     const clean = Math.max(0, Math.min(7, Number(val) || 0));
     setSession((prev) => ({
       ...prev,
       scores: {
         ...prev.scores,
-        [cadet]: prev.scores[cadet].map((v, i) => (i === traitIdx ? clean : v)),
+        [student]: prev.scores[student].map((v, i) => (i === traitIdx ? clean : v)),
       },
     }));
   };
-  const setObsScore = (cadet, idx, val) => {
+  const setObsScore = (student, idx, val) => {
     const clean = Math.max(0, Math.min(7, Number(val) || 0));
     setSession((prev) => ({
       ...prev,
       obsScores: {
         ...prev.obsScores,
-        [cadet]: prev.obsScores[cadet].map((v, i) => (i === idx ? clean : v)),
+        [student]: prev.obsScores[student].map((v, i) => (i === idx ? clean : v)),
       },
     }));
   };
@@ -45,7 +45,7 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
   };
 
   const computed = useMemo(() => {
-    // Only ever iterate over the CURRENT active list — a cadet number that
+    // Only ever iterate over the CURRENT active list — a student number that
     // was removed (e.g. marked as dropped) never appears in totals, rank,
     // or the weak->strong ordering, so it cannot show up in any histogram.
     const totals = {};
@@ -53,7 +53,7 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
       totals[c] = computeScore(scores[c] || Array(7).fill(0), weights);
     });
 
-    // Only cadets with at least one non-zero score participate in the
+    // Only students with at least one non-zero score participate in the
     // live histogram — this lets it fill in gradually as scores are typed,
     // instead of jumping from empty to full.
     const scoredActive = active.filter((c) => (scores[c] || []).some((v) => v > 0));
@@ -123,7 +123,7 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
                     <input
                       type="number"
                       inputMode="numeric"
-                      aria-label={`${trait} — מלש"ב ${c}`}
+                      aria-label={`${trait} — תלמיד ${c}`}
                       min={1}
                       max={7}
                       value={(scores[c] && scores[c][tIdx]) || ""}
@@ -160,7 +160,7 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
                     <input
                       type="number"
                       inputMode="numeric"
-                      aria-label={`${trait} — מלש"ב ${c} (לצפייה בלבד)`}
+                      aria-label={`${trait} — תלמיד ${c} (לצפייה בלבד)`}
                       min={1}
                       max={7}
                       value={(obsScores[c] && obsScores[c][oIdx]) || ""}
