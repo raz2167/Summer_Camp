@@ -178,6 +178,11 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
         </div>
         <h1 className="text-[34px] font-extrabold m-0 tracking-tight">הזנת ציונים</h1>
 
+        <p className="text-[13px] text-muted mt-2">
+          לחצו על מספר תלמיד למעלה כדי להזין לו ציונים בעזרת סליידרים, או הקלידו ישירות
+          בתאים בטבלה.
+        </p>
+
         {/* TEMP TESTING TOOLS — remove before shipping. */}
         <div className="flex gap-2 mt-4 flex-wrap">
           <button
@@ -185,18 +190,6 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
             onClick={() => fillRandom(1)}
           >
             🎲 מלא אקראית (בדיקה)
-          </button>
-          <button
-            className="bg-green text-cream border-none py-2 px-4 text-[13px] font-bold rounded font-heebo cursor-pointer hover:opacity-90"
-            onClick={() => fillRandom(0.35)}
-          >
-            💪 מלא אקראי — כיתה חזקה
-          </button>
-          <button
-            className="bg-warn text-cream border-none py-2 px-4 text-[13px] font-bold rounded font-heebo cursor-pointer hover:opacity-90"
-            onClick={() => fillRandom(2.5)}
-          >
-            📉 מלא אקראי — כיתה חלשה
           </button>
           <button
             className="bg-transparent border border-sand text-muted py-2 px-4 text-[13px] font-bold rounded font-heebo cursor-pointer hover:border-muted"
@@ -401,9 +394,9 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
           <div>
             <div className="text-lg font-extrabold mb-5">
               <span className="block text-[11px] font-bold tracking-wider text-green uppercase mb-1">
-                התפלגות אמיתית
+                החלוקה הטבעית ביותר
               </span>
-              התפלגות נורמלית לפי הציונים שהזנת עד כה
+              החלוקה שהכי מתאימה לציונים שהזנת עד כה — לא היסטוגרמה קבועה
             </div>
             <HistogramGrid groups={computed.liveGrid} minSlots={comparisonMinSlots} />
           </div>
@@ -453,7 +446,7 @@ export default function PageScoring({ setup, session, setSession, onBack }) {
 
         {computed.tieGroups.length > 0 && (
           <div className="bg-hint border border-hint-border text-hint-text py-3 px-[18px] rounded-md text-[13px] font-semibold mb-6">
-            הערה: מבנה ההיסטוגרמות הקבועות (וגם ההתפלגות האמיתית) קבוע ואינו משתנה. כאשר
+            הערה: מבנה ההיסטוגרמות הקבועות (וגם החלוקה הטבעית ביותר) קבוע ואינו משתנה. כאשר
             לכמה תלמידים יש ציון זהה והם מתחרים על אותו מקום, השיבוץ נקבע לפי משרעת נמוכה
             יותר קודם; אם גם המשרעת זהה — לפי ממוצע כושר גופני והתאמה לפעילות שטח (גבוה
             יותר עדיף); ואם גם זה זהה — לפי מספר תלמיד נמוך יותר.
