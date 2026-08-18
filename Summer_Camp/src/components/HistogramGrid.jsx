@@ -5,7 +5,17 @@ import { HIST_COLORS } from "../constants.js";
 // explicit client design decision, not a bug.
 const ORDER = [7, 6, 5, 4, 3, 2, 1];
 
-export default function HistogramGrid({ groups, showNumbers = true }) {
+// minSlots: reserves a fixed vertical space for the bar area (measured in
+// "slots" — the widest column across a set of histograms, e.g. all the
+// fixed templates for a class size) so multiple HistogramGrids placed next
+// to each other always share the same baseline and the same overall frame
+// size, regardless of how tall each one's own tallest column actually is.
+const SLOT_HEIGHT = 30;
+const SLOT_GAP = 3;
+
+export default function HistogramGrid({ groups, showNumbers = true, minSlots = 0 }) {
+  const trackMinHeight =
+    minSlots > 0 ? minSlots * SLOT_HEIGHT + Math.max(0, minSlots - 1) * SLOT_GAP : 34;
   return (
     <div>
       <div className="flex gap-2.5 items-end px-4 pt-5 pb-2" dir="ltr">
@@ -13,7 +23,10 @@ export default function HistogramGrid({ groups, showNumbers = true }) {
           const members = groups[g] || [];
           return (
             <div className="flex flex-col items-center w-14" key={g}>
-              <div className="flex flex-col-reverse gap-[3px] w-full min-h-[34px]">
+              <div
+                className="flex flex-col-reverse gap-[3px] w-full"
+                style={{ minHeight: trackMinHeight }}
+              >
                 {members.map((student, idx) => (
                   <div
                     key={idx}
