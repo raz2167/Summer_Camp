@@ -23,6 +23,14 @@ export const HIST_COLORS = {
 // Verified against the source spreadsheet — each row is [group1..group7] counts,
 // summing to the class size. Do not edit without re-verifying against the source.
 export const HIST_DATA = {
+  12: [
+    [1, 1, 2, 4, 2, 1, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+  ],
+  13: [
+    [1, 2, 2, 3, 2, 2, 1],
+    [1, 1, 2, 5, 2, 1, 1],
+  ],
   17: [
     [1, 2, 3, 5, 3, 2, 1], // היסטוגרמה א
     [1, 2, 2, 7, 2, 2, 1], // היסטוגרמה ב

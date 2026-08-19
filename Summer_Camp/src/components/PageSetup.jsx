@@ -10,7 +10,7 @@ export default function PageSetup({ initialSetup, onContinue }) {
     );
   });
   const activeCount = size - missing.length;
-  const validSize = activeCount >= 14 && activeCount <= 17;
+  const validSize = activeCount >= 12 && activeCount <= 17;
 
   const toggleMissing = (n) => {
     setMissing((prev) => (prev.includes(n) ? prev.filter((x) => x !== n) : [...prev, n]));
@@ -25,7 +25,7 @@ export default function PageSetup({ initialSetup, onContinue }) {
       </p>
 
       <div className="flex gap-3 mb-10 flex-wrap">
-        {[17, 16, 15, 14].map((s) => (
+        {[17, 16, 15, 14, 13, 12].map((s) => (
           <button
             key={s}
             className={
@@ -36,7 +36,7 @@ export default function PageSetup({ initialSetup, onContinue }) {
             }
             onClick={() => {
               setSize(s);
-              setMissing((prev) => prev.filter((n) => n <= s));
+              setMissing((prev) => (s === 12 ? [] : prev.filter((n) => n <= s)));
             }}
           >
             {s}
@@ -44,32 +44,41 @@ export default function PageSetup({ initialSetup, onContinue }) {
         ))}
       </div>
 
-      <div className="bg-cream border border-sand rounded-md p-6 mb-7">
-        <div className="text-[13px] font-bold text-muted mb-4">מספרי תלמיד שאינם פעילים</div>
-        <div className="flex flex-wrap gap-2">
-          {Array.from({ length: size }, (_, i) => i + 1).map((n) => (
-            <button
-              key={n}
-              className={
-                "w-11 h-11 rounded font-heebo text-[15px] font-bold border-2 border-transparent transition-all " +
-                (missing.includes(n)
-                  ? "bg-warn text-cream line-through"
-                  : "bg-cream-line text-ink hover:bg-sand-dim")
-              }
-              onClick={() => toggleMissing(n)}
-            >
-              {n}
-            </button>
-          ))}
+      {size === 12 ? (
+        <div className="bg-cream border border-sand rounded-md p-6 mb-7">
+          <div className="text-[13px] text-muted">
+            12 היא הכיתה הכי קטנה שנתמכת — לא ניתן לסמן תלמידים שאינם פעילים, כי אז הכיתה
+            תרד מתחת למינימום.
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="bg-cream border border-sand rounded-md p-6 mb-7">
+          <div className="text-[13px] font-bold text-muted mb-4">מספרי תלמיד שאינם פעילים</div>
+          <div className="flex flex-wrap gap-2">
+            {Array.from({ length: size }, (_, i) => i + 1).map((n) => (
+              <button
+                key={n}
+                className={
+                  "w-11 h-11 rounded font-heebo text-[15px] font-bold border-2 border-transparent transition-all " +
+                  (missing.includes(n)
+                    ? "bg-warn text-cream line-through"
+                    : "bg-cream-line text-ink hover:bg-sand-dim")
+                }
+                onClick={() => toggleMissing(n)}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="flex items-baseline gap-2.5 mb-8 py-4 px-5 bg-ink rounded-md text-cream flex-wrap">
         <span className="text-3xl font-black text-gold">{activeCount}</span>
         <span className="text-sm text-sand">חניכים פעילים</span>
         {!validSize && (
           <span className="mr-auto text-[13px] text-[#E08B5E] font-semibold">
-            טווח נתמך: 14–17 חניכים פעילים
+            טווח נתמך: 12–17 חניכים פעילים
           </span>
         )}
       </div>
